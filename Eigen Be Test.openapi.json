@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.1",
+  "info": { "title": "Eigen Be Test", "description": "", "version": "1.0.0" },
+  "tags": [],
+  "paths": {
+    "/members/borrowBook": {
+      "post": {
+        "summary": "borrow book",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "memberId": { "example": "M001", "type": "string" },
+                  "bookId": { "example": "NRN-7", "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "properties": {} },
+                "examples": {
+                  "1": {
+                    "summary": "Success borrow book",
+                    "value": { "message": "Success borrow book" }
+                  },
+                  "2": {
+                    "summary": "failed, book no available",
+                    "value": { "message": "Book not available" }
+                  },
+                  "3": {
+                    "summary": "failed, member reach limit for borrowing book",
+                    "value": {
+                      "message": "This member already reach limit for borrowing books"
+                    }
+                  },
+                  "4": {
+                    "summary": "failed, member in penalty",
+                    "value": { "message": "This member is in penalty period" }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/members/returnBook": {
+      "post": {
+        "summary": "return book",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "memberId": { "example": "M001", "type": "string" },
+                  "bookId": { "example": "NRN-7", "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "properties": {} },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": { "message": "Success return book" }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/books": {
+      "get": {
+        "summary": "list all available books",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "properties": {} },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "message": "Success get books",
+                      "data": [
+                        {
+                          "id": "JK-45",
+                          "title": "Harry Potter",
+                          "author": "J.K Rowling",
+                          "stock": 1
+                        },
+                        {
+                          "id": "SHR-1",
+                          "title": "A Study in Scarlet",
+                          "author": "Arthur Conan Doyle",
+                          "stock": 1
+                        },
+                        {
+                          "id": "TW-11",
+                          "title": "Twilight",
+                          "author": "Stephenie Meyer",
+                          "stock": 1
+                        },
+                        {
+                          "id": "HOB-83",
+                          "title": "The Hobbit, or There and Back Again",
+                          "author": "J.R.R. Tolkien",
+                          "stock": 1
+                        },
+                        {
+                          "id": "NRN-7",
+                          "title": "The Lion, the Witch and the Wardrobe",
+                          "author": "C.S. Lewis",
+                          "stock": 1
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/members": {
+      "get": {
+        "summary": "list all members with theirs borrowed books",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "properties": {} },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "message": "Success get members",
+                      "data": [
+                        {
+                          "id": "M001",
+                          "name": "Angga",
+                          "total_borrowed_book": 0
+                        },
+                        {
+                          "id": "M002",
+                          "name": "Ferry",
+                          "total_borrowed_book": 2
+                        },
+                        {
+                          "id": "M003",
+                          "name": "Putri",
+                          "total_borrowed_book": 0
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": { "schemas": {}, "securitySchemes": {} },
+  "servers": [{ "url": "localhost:3250", "description": "eigen_be_test" }]
+}
